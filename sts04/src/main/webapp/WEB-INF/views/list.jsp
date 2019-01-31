@@ -30,10 +30,10 @@
 				<tbody>
 					<c:forEach items="${list }" var="bean">
 						<tr>
-							<td><a href="detail">${bean.bbs_num }</a></td>
-							<td><a href="detail">${bean.sub }</a></td>
-							<td><a href="detail">${bean.name }</a></td>
-							<td><a href="detail">${bean.cnt }</a></td>
+							<td><a href="detail?idx=${bean.bbs_num }">${bean.bbs_num }</a></td>
+							<td><a href="detail?idx=${bean.bbs_num }">${bean.sub }</a></td>
+							<td><a href="detail?idx=${bean.bbs_num }">${bean.name }</a></td>
+							<td><a href="detail?idx=${bean.bbs_num }">${bean.cnt }</a></td>
 						</tr>
 					</c:forEach>
 				</tbody>

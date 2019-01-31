@@ -42,14 +42,40 @@ public class Bbs06DaoImpl implements Bbs06Dao {
 
 	@Override
 	public Bbs06Vo selectOne(int idx) throws SQLException {
-		// TODO Auto-generated method stub
-		return null;
+		String sql="select bbs_num,user_num,"
+				+ "(select name from user06 where user_num=A.user_num) as name,"
+				+ "sub,content,cnt from bbs06 A where bbs_num=?";
+		try(Connection conn=dataSource.getConnection()){
+			conn.setAutoCommit(false);
+			updateCnt(idx);
+			PreparedStatement pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, idx);
+			ResultSet rs = pstmt.executeQuery();
+			if(!rs.next())return null;
+			Bbs06Vo bean =new Bbs06Vo(
+					rs.getInt("bbs_num"),rs.getString("name"),rs.getString("sub"),
+					rs.getString("content"),rs.getInt("cnt")
+					);
+			bean.setUser_num(rs.getInt("user_num"));
+			conn.commit();
+			rs.close();
+			pstmt.close();
+			
+			return bean;
+		}
 	}
 
 	@Override
 	public void insertOne(Bbs06Vo bean) throws SQLException {
-		// TODO Auto-generated method stub
-
+		String sql="insert into bbs06 values (bbs06_seq.nextval,?,?,?,0)";
+		try(Connection conn=dataSource.getConnection()){
+			PreparedStatement pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, bean.getUser_num());
+			pstmt.setString(2, bean.getSub());
+			pstmt.setString(3, bean.getContent());
+			pstmt.executeUpdate();
+			pstmt.close();
+		}
 	}
 
 	@Override
@@ -66,8 +92,30 @@ public class Bbs06DaoImpl implements Bbs06Dao {
 
 	@Override
 	public int updateCnt(int idx) throws SQLException {
-		// TODO Auto-generated method stub
+		String sql="UPDATE BBS06 SET CNT=CNT+1 WHERE BBS_NUM=?";
 		return 0;
 	}
 
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

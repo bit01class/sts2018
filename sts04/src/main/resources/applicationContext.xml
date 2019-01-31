@@ -3,7 +3,20 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 
+<bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+	<property name="location" value="classpath:oracle.properties"></property>
+</bean>
 
-<bean id="bbs06Dao" class="com.bit.sts04.model.Bbs06DaoImpl"></bean>
+<bean id="dataSource"
+ class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+ 	<property name="driverClassName" value="${jdbc.driver}"/>
+ 	<property name="url" value="${jdbc.url}"/>
+ 	<property name="username" value="${jdbc.username}"/>
+ 	<property name="password" value="${jdbc.password}"/>
+ </bean>
+
+<bean id="bbs06Dao" class="com.bit.sts04.model.Bbs06DaoImpl">
+	<property name="dataSource" ref="dataSource"></property>
+</bean>
 
 </beans>

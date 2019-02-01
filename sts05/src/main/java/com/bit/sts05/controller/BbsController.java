@@ -2,6 +2,8 @@ package com.bit.sts05.controller;
 
 import java.sql.SQLException;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -14,11 +16,13 @@ import com.bit.sts05.model.entity.Bbs06Vo;
 @Controller
 @RequestMapping("/bbs/*")
 public class BbsController {
+	Logger log=LoggerFactory.getLogger(this.getClass());
 	@Autowired
 	Bbs06Dao bbs06Dao;
 	
 	@RequestMapping("list")
 	public void list(Model model) throws SQLException {
+		log.debug("list...");
 		model.addAttribute("list",bbs06Dao.selectAll());
 	}
 	

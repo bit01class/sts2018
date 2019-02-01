@@ -41,7 +41,9 @@
 <%@ include file="/template/footer.jspf" %>
 </body>
 </html>
-
+<%
+System.out.println("view...");
+%>
 
 
 

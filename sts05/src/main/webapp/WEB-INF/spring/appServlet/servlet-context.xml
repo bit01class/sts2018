@@ -25,6 +25,27 @@
 	
 	<context:component-scan base-package="com.bit.sts05" />
 	
-	
+	<interceptors>
+		<interceptor>
+			<mapping path="/bbs/detail"/>
+			<beans:bean id="myInterceptor" class="com.bit.sts05.interceptor.MyInterceptor"></beans:bean>
+		</interceptor>
+	</interceptors>
 	
 </beans:beans>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

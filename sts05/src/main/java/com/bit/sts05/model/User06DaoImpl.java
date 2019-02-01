@@ -31,4 +31,25 @@ public class User06DaoImpl implements User06Dao {
 		return jdbcTemplate.queryForObject(sql,new Object[] {bean.getId(),bean.getPw()}, rowMapper);
 	}
 
+	@Override
+	public void join(User06Vo bean) throws SQLException {
+		String sql="insert into user06 values (user06_seq.nextval,?,?,?)";
+		jdbcTemplate.update(sql, new Object[] {bean.getId(),bean.getPw(),bean.getName()});
+	}
+	
+	
+
 }
+
+
+
+
+
+
+
+
+
+
+
+
+

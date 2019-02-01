@@ -1,8 +1,24 @@
 package com.bit.sts05.model.entity;
 
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+
 public class User06Vo {
 	private int user_num;
-	private String id,pw,name;
+	
+	@NotEmpty
+	@Email
+	private String id;
+	
+	@NotNull
+	@Size(min = 4, max = 6)
+	private String pw;
+	
+	@NotNull
+	@Size(min = 2, max = 5)
+	private String name;
 	
 	public User06Vo() {
 	}

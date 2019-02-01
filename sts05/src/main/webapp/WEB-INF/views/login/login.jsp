@@ -6,6 +6,13 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <%@ include file="/template/header.jspf" %>
+<script type="text/javascript">
+	/* $(function(){
+		$('#join').click(function(){
+			location.href='join';
+		});
+	}); */
+</script>
 </head>
 <body>
 <%@ include file="/template/menu.jspf" %>
@@ -27,7 +34,8 @@
 			<div class="form-group">
 				<button type="submit" class="btn btn-primary">로그인</button>
 				<button type="reset" class="btn btn-default">취소</button>
-				<button type="button" class="btn btn-default">회원가입</button>
+				<!-- <button id="join" type="button" class="btn btn-default">회원가입</button> -->
+				<a href="join" role="button" class="btn btn-default">회원가입</a>
 			</div>			
 		</form>
 	</div>

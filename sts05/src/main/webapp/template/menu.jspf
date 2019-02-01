@@ -1,0 +1,28 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+
+<div class="container">
+	<div id="menu" class="row">
+		<div class="col-md-12">
+			<div class="navbar navbar-default">
+			  <div class="container-fluid">
+			    <div class="navbar-header">
+			      <a class="navbar-brand" href="#">
+			        비트교육센터
+			      </a>
+			    </div>
+			    
+			    <ul class="nav navbar-nav">
+			    	<li><a href="${home }">HOME</a></li>
+			    	<li><a href="${home }intro">INTRO</a></li>
+			    	<li><a href="${home }bbs/list">BBS</a></li>
+			    	<li><a href="${home }login/login">LOGIN</a></li>
+			    </ul>
+			  </div>
+			</div>
+		
+		</div>
+	</div>
+	<div id="content" class="row">
+
+    

@@ -16,7 +16,12 @@
 			    	<li><a href="${home }">HOME</a></li>
 			    	<li><a href="${home }intro">INTRO</a></li>
 			    	<li><a href="${home }bbs/list">BBS</a></li>
+			    	<c:if test="${sessionScope.login eq null}">
 			    	<li><a href="${home }login/login">LOGIN</a></li>
+			    	</c:if>
+			    	<c:if test="${sessionScope.login ne null}">
+			    	<li><a href="${home }login/logout">LOGOUT</a></li>
+			    	</c:if>
 			    </ul>
 			  </div>
 			</div>

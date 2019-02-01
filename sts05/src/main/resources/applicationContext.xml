@@ -18,9 +18,22 @@
 	<bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">
 		<property name="dataSource" ref="dataSource"></property>
 	</bean>
+	
+	<bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<constructor-arg name="dataSource" ref="dataSource"></constructor-arg>
+	</bean>
 
 	<bean id="user06Dao" class="com.bit.sts05.model.User06DaoImpl">
 		<constructor-arg name="jdbcTemplate" ref="jdbcTemplate"></constructor-arg>
 	</bean>
 
 </beans>
+
+
+
+
+
+
+
+
+

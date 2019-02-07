@@ -4,25 +4,24 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 
+import javax.inject.Inject;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Repository;
 
 import com.bit.sts06.model.entity.BbsVo;
 
-@Component
+@Repository
 public class BBsDaoImpl implements BbsDao {
 	Logger log=LoggerFactory.getLogger(this.getClass());
 	
-	//@Autowired
+	@Inject
 	JdbcTemplate jdbcTemplate;
-	
-	public void setJdbcTemplate(JdbcTemplate jdbcTemplate) {
-		this.jdbcTemplate = jdbcTemplate;
-	}
 	
 	private RowMapper<BbsVo> rowMapper=new RowMapper<BbsVo>() {
 		
@@ -44,32 +43,33 @@ public class BBsDaoImpl implements BbsDao {
 
 	@Override
 	public BbsVo selectOne(int idx) throws SQLException {
-		// TODO Auto-generated method stub
-		return null;
+		String sql="SELECT * FROM BBS WHERE NUM=?";
+		return jdbcTemplate.queryForObject(sql, rowMapper,idx);
 	}
 
 	@Override
 	public void insertOne(BbsVo bean) throws SQLException {
-		// TODO Auto-generated method stub
-
+		String sql="INSERT INTO BBS (SUB,CONTENT,NALJA,CNT) VALUES (?,?,NOW(),0)";
+		jdbcTemplate.update(sql, bean.getSub(),bean.getContent());
 	}
 
 	@Override
 	public int updateOne(BbsVo bean) throws SQLException {
-		// TODO Auto-generated method stub
-		return 0;
+		String sql="UPDATE BBS SET SUB=?,CONTENT=? WHERE NUM=?";
+		return jdbcTemplate.update(sql, bean.getSub(),
+									bean.getContent(),bean.getNum());
 	}
 
 	@Override
 	public int deleteOne(int idx) throws SQLException {
-		// TODO Auto-generated method stub
-		return 0;
+		String sql="DELETE FROM BBS WHERE NUM=?";
+		return jdbcTemplate.update(sql, idx);
 	}
 
 	@Override
 	public int cntOne(int idx) throws SQLException {
-		// TODO Auto-generated method stub
-		return 0;
+		String sql="UPDATE BBS2 SET CNT=CNT+1 WHERE NUM=?";
+		return jdbcTemplate.update(sql, idx);
 	}
 
 }

@@ -14,6 +14,12 @@
 	<logger name="com.bit.sts06">
 		<level value="info" />
 	</logger>
+	<logger name="com.bit.sts06.model">
+		<level value="debug" />
+	</logger>
+	<logger name="com.bit.sts06.aop">
+		<level value="debug" />
+	</logger>
 	
 	<!-- 3rdparty Loggers -->
 	<logger name="org.springframework.core">

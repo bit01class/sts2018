@@ -13,40 +13,8 @@
 	<bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">
 		<property name="dataSource" ref="dataSource"></property>
 	</bean>
-	
+
 	<bean id="bbsDao" class="com.bit.sts06.model.BBsDaoImpl">
 		<property name="jdbcTemplate" ref="jdbcTemplate"></property>
 	</bean>
-	<!-- 
-	<bean id="methodBeforeAdvice" class="com.bit.sts06.aop.LogBefore"></bean>
-	<bean id="afterReturningAdvice" class="com.bit.sts06.aop.LogAfter"></bean>
-	 -->
-	<bean id="methodInterceptor" class="com.bit.sts06.aop.LogAround"></bean>
-	
-	<bean id="advised" class="org.springframework.aop.framework.ProxyFactoryBean">
-		<property name="target" ref="bbsDao"></property>
-		<property name="interceptorNames">
-			<list>
-				<!-- 
-				<value>afterReturningAdvice</value>
-				<value>methodBeforeAdvice</value>
-				 -->
-				<value>methodInterceptor</value>
-			</list>
-		</property>
-	</bean>
-	
 </beans>
-
-
-
-
-
-
-
-
-
-
-
-
-

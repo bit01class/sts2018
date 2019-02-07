@@ -16,7 +16,7 @@ import com.bit.sts06.model.BbsDao;
 public class BbsController {
 	
 	@Autowired
-	@Qualifier("advised")
+//	@Qualifier("advised")
 	BbsDao bbsDao;
 
 	@RequestMapping("list")

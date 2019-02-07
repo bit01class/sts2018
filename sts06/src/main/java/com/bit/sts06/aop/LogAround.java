@@ -1,5 +1,7 @@
 package com.bit.sts06.aop;
 
+import java.util.Arrays;
+
 import org.aopalliance.intercept.MethodInterceptor;
 import org.aopalliance.intercept.MethodInvocation;
 import org.slf4j.Logger;
@@ -12,10 +14,31 @@ public class LogAround implements MethodInterceptor {
 	public Object invoke(MethodInvocation invocation) throws Throwable {
 		
 		log.debug("AOP around before...");
-		Object obj=invocation.proceed();
-		log.debug("AOP around after...");
+		log.debug(invocation.getMethod().getName());
+		log.debug(Arrays.toString(invocation.getArguments()));
+		log.debug(invocation.getThis().toString());
+		Object obj=null;
+		try {
+			obj=invocation.proceed();
+		}catch (Exception e) {
+			log.debug("AOP around exception...");
+		}
+		log.debug("AOP around after..."+obj);
 		
 		return obj;
 	}
 
 }
+
+
+
+
+
+
+
+
+
+
+
+
+

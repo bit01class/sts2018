@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.2.xsd">
 
 	<bean id="dataSource" class="org.apache.tomcat.jdbc.pool.DataSource">
 		<property name="driverClassName" value="org.h2.Driver"/>
@@ -17,26 +19,113 @@
 	<bean id="bbsDao" class="com.bit.sts06.model.BBsDaoImpl">
 		<property name="jdbcTemplate" ref="jdbcTemplate"></property>
 	</bean>
+	
+	<bean id="aspectjBefore" class="com.bit.sts06.aop.AspectjBefore"></bean>
+	<bean id="aspectjAfter" class="com.bit.sts06.aop.AspectjAfter"></bean>
+	<bean id="aspectjAround" class="com.bit.sts06.aop.AspectjAround"></bean>
+	<aop:config>
+		<!-- 
+		<aop:aspect ref="aspectjBefore">
+			<aop:pointcut id="pointcutBefore" 
+				expression="execution(* com.bit.sts06.model.BbsDao.selectAll())"/>
+			<aop:before method="jBefore" pointcut-ref="pointcutBefore"/>
+		</aop:aspect>
+		<aop:aspect ref="aspectjAfter">
+			<aop:pointcut id="pointcutAfter"
+				 expression="execution(* com.bit.sts06.model.BbsDao.select*(..))"/>
+			<aop:after method="jAfter" pointcut-ref="pointcutAfter"/>
+		</aop:aspect>
+		 -->
+		<aop:aspect ref="aspectjAround">
+			<aop:pointcut id="pointcutAround" 
+				expression="execution(* com.bit.sts06.model.BbsDao.*(..))"/>
+			<aop:around method="jAround" pointcut-ref="pointcutAround"/>
+		</aop:aspect>
+	</aop:config>
+	
+	
+	
+	
+	
+	
+	
 	<!-- 
 	<bean id="methodBeforeAdvice" class="com.bit.sts06.aop.LogBefore"></bean>
 	<bean id="afterReturningAdvice" class="com.bit.sts06.aop.LogAfter"></bean>
-	 -->
 	<bean id="methodInterceptor" class="com.bit.sts06.aop.LogAround"></bean>
+	<bean id="throwsAdvice" class="com.bit.sts06.aop.LogThrow"></bean>
+	 -->
 	
+	<!-- advised 
 	<bean id="advised" class="org.springframework.aop.framework.ProxyFactoryBean">
 		<property name="target" ref="bbsDao"></property>
 		<property name="interceptorNames">
 			<list>
-				<!-- 
 				<value>afterReturningAdvice</value>
 				<value>methodBeforeAdvice</value>
-				 -->
-				<value>methodInterceptor</value>
+				<value>throwsAdvice</value>
+				<value>pointcutAdvisor</value>
 			</list>
 		</property>
 	</bean>
+	-->
+	
+	<!-- pointcut  
+	<bean id="pointcut" class="org.springframework.aop.support.NameMatchMethodPointcut">
+		<property name="mappedNames">
+			<list>
+				<value>selectAll</value>
+				<value>selectOne</value>
+			</list>
+		</property>
+	</bean>
+	-->
+	
+	<!-- advisor 
+	<bean id="pointcutAdvisor" class="org.springframework.aop.support.DefaultPointcutAdvisor">
+		<property name="pointcut" ref="pointcut" ></property>
+		<property name="advice" ref="methodInterceptor"></property>
+	</bean>
+	-->
+	<!-- 
+	<bean id="pointcutAdvisor" class="org.springframework.aop.support.NameMatchMethodPointcutAdvisor">
+		<property name="mappedName" value="selectAll"></property>
+		<property name="advice" ref="methodInterceptor"></property>
+	</bean>
+	 -->
+	<!-- 
+	<bean id="pointcutAdvisor" class="org.springframework.aop.support.RegexpMethodPointcutAdvisor">
+		<property name="pattern" value=".*One.*"></property>	
+		<property name="advice" ref="methodInterceptor"></property>
+	</bean>
+	 -->
 	
 </beans>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

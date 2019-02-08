@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
+    "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+    
+<sqlMap>
+	<typeAlias alias="dto" type="com.bit.sts07.model.entity.Bbs2Vo"/>
+	
+	<select id="selectAll" resultClass="dto">
+	SELECT * FROM BBS2 ORDER BY NUM DESC
+	</select>
+	
+	<select id="selectOne" resultClass="dto" parameterClass="int">
+	select * from bbs2 where num=#value#
+	</select>
+	
+	<insert id="insertOne" parameterClass="dto">
+	INSERT INTO BBS2 VALUES (BBS2_SEQ.NEXTVAL,#sub#,#content#,SYSDATE)
+	</insert>
+
+	<update id="updateOne" parameterClass="dto">
+	UPDATE BBS2 SET SUB=#sub#, CONTENT=#content# WHERE NUM=#num#
+	</update>
+	
+	<delete id="deleteOne" parameterClass="int">
+	DELETE FROM BBS2 WHERE NUM=#value#
+	</delete>
+</sqlMap>
+
+
+
+
+
+
+
+
+
+
